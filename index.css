@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de Videojuegos</title>
+  <style>
+    /* Estilos CSS para la página */
+    body {
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #555;
+      overflow: hidden;
+    }
+    
+    nav li {
+      float: left;
+    }
+    
+    nav li a {
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    nav li a:hover {
+      background-color: #777;
+    }
+    
+    main {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .juego {
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .juego img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .juego h2 {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+    
+    .juego p {
+      margin-top: 10px;
+      color: #888;
+    }
+    
+    .juego a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-decoration: none;
+    }
+    
+    .juego a:hover {
+      background-color: #555;
+    }
+    
+    .juego button {
+      display: block;
+      margin-top: 10px;
+      background-color: #555;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .juego button:hover {
+      background-color: #777;
+    }
+  </style>
+  <script>
+    // Funcionalidad para agregar juegos favoritos
+    function agregarFavorito(juegoId) {
+      var juegoFavorito = localStorage.getItem('juegoFavorito');
+      if (juegoFavorito) {
+        juegoFavorito = JSON.parse(juegoFavorito);
+      } else {
+        juegoFavorito = [];
+      }
+      if (!juegoFavorito.includes(juegoId)) {
+        juegoFavorito.push(juegoId);
+        localStorage.setItem('juegoFavorito', JSON.stringify(juegoFavorito));
+        alert('Juego agregado a favoritos');
+      } else {
+        alert('El juego ya está en favoritos');
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Página de Videojuegos</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Juegos</a></li>
+      <li><a href="#">Noticias</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="juego">
+      <img src="https://image.api.playstation.com/vulcan/ap/rnd/202301/0312/yM0eeJui8AFByeP5BC5XV5j9.png" alt="Juego 1">
+      <h2>Juego 1</h2>
+      <p>Descripción del juego 1...</p>
+      <a href="juego1.html">Jugar</a>
+      <button onclick="agregarFavorito(1)">Agregar a Favoritos</button>
+    </div>
+    <div class="juego">
+      <img src="https://image.api.playstation.com/vulcan/ap/rnd/202211/2212/4zIDTVwCOcyU0B51RywhFNE0.jpg" alt="Juego 2">
+      <h2>Juego 2</h2>
+      <p>Descripción del juego 2...</p>
+      <a href="juego2.html">Jugar</a>
+      <button onclick="agregarFavorito(2)">Agregar a Favoritos</button>
+    </div>
+    <!-- Agrega más juegos aquí -->
+  </main>
+</body>
+</html>

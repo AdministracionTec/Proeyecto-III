@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de Videojuegos Para nuestro ChatBot</title>
+  <style>
+    /* Estilos CSS para la página */
+    body {
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #555;
+      overflow: hidden;
+    }
+    
+    nav li {
+      float: left;
+    }
+    
+    nav li a {
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    nav li a:hover {
+      background-color: #777;
+    }
+    
+    main {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Centrar los juegos horizontalmente */
+    }
+    
+    .juego {
+      position: relative; /* Agregar posición relativa para el efecto de estallido */
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s; /* Agregar una transición al efecto de escala */
+    }
+    
+    .juego:hover {
+      transform: scale(1.1); /* Ampliar el juego en un 10% al pasar el puntero */
+    }
+    
+    .juego img {
+      width: 100%;
+      height: auto;
+    }
+    
+    .juego h2 {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+    
+    .juego p {
+      margin-top: 10px;
+      color: #888;
+    }
+    
+    .juego a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-decoration: none;
+    }
+    
+    .juego a:hover {
+      background-color: #555;
+    }
+    
+    .juego button {
+      display: block;
+      margin-top: 10px;
+      background-color: #555;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .juego button:hover {
+      background-color: #777;
+    }
+    
+    /* Estilos CSS para el efecto de estallido */
+    .estallido {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .estallido.visible {
+      opacity: 1;
+    }
+    
+    .estallido img {
+      width: 100px;
+      height: 100px;
+      animation: estallar 0.3s;
+    }
+    
+    @keyframes estallar {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+  <script>
+    // Funcionalidad para agregar juegos favoritos
+    function agregarFavorito(juegoId) {
+      var juegoFavorito = localStorage.getItem('juegoFavorito');
+      if (juegoFavorito) {
+        juegoFavorito = JSON.parse(juegoFavorito);
+      } else {
+        juegoFavorito = [];
+      }
+      if (!juegoFavorito.includes(juegoId)) {
+        juegoFavorito.push(juegoId);
+        localStorage.setItem('juegoFavorito', JSON.stringify(juegoFavorito));
+        alert('Juego agregado a favoritos');
+      } else {
+        alert('El juego ya está en favoritos');
+      }
+    }
+    
+    // Funcionalidad para el efecto de estallido
+    function estallar(juegoId) {
+      var juego = document.getElementById('juego-' + juegoId);
+      var estallido = document.createElement('div');
+      estallido.classList.add('estallido');
+      var img = document.createElement('img');
+      img.src = 'https://i.imgur.com/Fz6G8qC.png';
+      estallido.appendChild(img);
+      juego.appendChild(estallido);
+      setTimeout(function() {
+        estallido.classList.add('visible');
+        setTimeout(function() {
+          juego.removeChild(estallido);
+        }, 300);
+      }, 0);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Página de Videojuegos Para nuestro ChatBot</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Juegos</a></li>
+      <li><a href="#">Noticias</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="juego" id="juego-1">
+      <img src="https://image.api.playstation.com/vulcan/ap/rnd/202301/0312/yM0eeJui8AFByeP5BC5XV5j9.png" alt="Juego 1">
+      <h2>Juego 1</h2>
+      <p>Descripción del juego 1...</p>
+      <a href="juego1.html">Jugar</a>
+      <button onclick="agregarFavorito(1)">Agregar a Favoritos</button>
+      <button onclick="estallar(1)">Estallar</button>
+    </div>
+    <div class="juego" id="juego-2">
+      <img src="https://image.api.playstation.com/vulcan/ap/rnd/202211/2212/4zIDTVwCOcyU0B51RywhFNE0.jpg" alt="Juego 2">
+      <h2>Juego 2</h2>
+      <p>Descripción del juego 2...</p>
+      <a href="juego2.html">Jugar</a>
+      <button onclick="agregarFavorito(2)">Agregar a Favoritos</button>
+      <button onclick="estallar(2)">Estallar</button>
+    </div>
+    <div class="juego" id="juego-3">
+      <img src="https://media.es.wired.com/photos/645d4a69a566376ee967bb98/16:9/w_2560%2Cc_limit/Zelda-Tears-Of-The-Kingdom-Culture-TotK_3rd_54.jpg" alt="Juego 3">
+      <h2>Juego 3</h2>
+      <p>Descripción del juego 3...</p>
+      <a href="juego3.html">Jugar</a>
+      <button onclick="agregarFavorito(3)">Agregar a Favoritos</button>
+      <button onclick="estallar(3)">Estallar</button>
+    </div>
+    <div class="juego" id="juego-4">
+      <img src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000012332/ac4d1fc9824876ce756406f0525d50c57ded4b2a666f6dfe40a6ac5c3563fad9" alt="Juego 4">
+      <h2>Juego 4</h2>
+      <p>Descripción del juego 4...</p>
+      <a href="juego4.html">Jugar</a>
+      <button onclick="agregarFavorito(4)">Agregar a Favoritos</button>
+      <button onclick="estallar(4)">Estallar</button>
+    </div>
+    <div class="juego" id="juego-5">
+      <img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/03/30/15855893593327.jpg" alt="Juego 5">
+      <h2>Juego 5</h2>
+      <p>Descripción del juego 5...</p>
+      <a href="juego5.html">Jugar</a>
+      <button onclick="agregarFavorito(5)">Agregar a Favoritos</button>
+      <button onclick="estallar(5)">Estallar</button>
+    </div>
+    <div class="juego" id="juego-6">
+      <img src="https://www.minecraft.net/content/dam/games/badger/key-art/MC-Homepage_Media-Block-0_MC-Legends_600x360.jpg" alt="Juego 6">
+      <h2>Juego 6</h2>
+      <p>Descripción del juego 6...</p>
+      <a href="juego6.html">Jugar</a>
+      <button onclick="agregarFavorito(6)">Agregar a Favoritos</button>
+      <button onclick="estallar(6)">Estallar</button>
+    </div>
+    <!-- Agrega más juegos aquí -->
+  </main>
+</body>
+</html>
